@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AM Games — Play</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="theme.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="index.html">AM<span>.</span></a>
+  <nav><a href="index.html">Home</a><a href="restaurant.html">AM Fine Dining</a><a href="spa.html">AM Spa</a><a class="active" href="games.html">Games</a></nav>
+  <button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Dark mode"><span aria-hidden="true">◐</span><span class="theme-label">Dark</span></button>
+</header>
+
+<main class="inner-page">
+  <section class="page-intro">
+    <p class="eyebrow">AM GAMES</p>
+    <h1>Take five.</h1>
+    <p>A few simple games, right in your browser. No sign-in required.</p>
+  </section>
+
+  <div class="games-grid">
+    <section class="game-card">
+      <div class="game-head"><div><span class="card-number">01</span><h2>Tic-Tac-Toe</h2></div><button class="small-button" onclick="resetTic()">Reset</button></div>
+      <div id="board" class="ttt-board"></div>
+      <p id="ttt-status" class="game-status">Your turn — X</p>
+    </section>
+
+    <section class="game-card">
+      <div class="game-head"><div><span class="card-number">02</span><h2>Memory Match</h2></div><button class="small-button" onclick="resetMemory()">New Game</button></div>
+      <div id="memory" class="memory-grid"></div>
+      <p id="memory-status" class="game-status">Find all 6 pairs.</p>
+    </section>
+
+    <section class="game-card wide-game">
+      <div class="game-head"><div><span class="card-number">03</span><h2>Number Guess</h2></div><button class="small-button" onclick="resetGuess()">New Number</button></div>
+      <p class="game-copy">I'm thinking of a number from <strong>1 to 50</strong>.</p>
+      <div class="guess-row"><input id="guess-input" type="number" min="1" max="50" placeholder="Your guess"><button class="button button-dark" onclick="makeGuess()">Guess</button></div>
+      <p id="guess-status" class="game-status">You have unlimited tries.</p>
+    </section>
+  </div>
+
+  <section class="game-card">
+    <div class="game-head"><div><span class="card-number">04</span><h2>Reaction Test</h2></div><button class="small-button" onclick="reactionStartGame()">Start</button></div>
+    <button id="reaction-btn" class="reaction-button" onclick="reactionClick()">Start</button>
+    <p id="reaction-status" class="game-status">Wait for the signal, then click as fast as you can.</p>
+  </section>
+
+  <section class="game-card">
+    <div class="game-head"><div><span class="card-number">05</span><h2>Dodge</h2></div><button class="small-button" onclick="startDodge()">New Run</button></div>
+    <canvas id="dodge-canvas" class="dodge-canvas" width="600" height="300"></canvas>
+    <div class="dodge-controls"><button class="small-button" onclick="dodgeMove(-20,0)">←</button><button class="small-button" onclick="dodgeMove(0,-20)">↑</button><button class="small-button" onclick="dodgeMove(0,20)">↓</button><button class="small-button" onclick="dodgeMove(20,0)">→</button></div>
+    <p id="dodge-status" class="game-status">Press New Run to start.</p>
+  </section>
+
+  <section class="game-card" style="margin-top:20px;text-align:center;padding:38px 28px">
+    <span class="card-number">06</span>
+    <h2 style="font:500 30px &quot;Playfair Display&quot;;margin:12px 0 8px">AM Run</h2>
+    <p style="color:var(--muted);font-size:14px;max-width:560px;margin:0 auto 20px">A long-form platformer adventure with ten extended levels, checkpoints, hidden coins, spikes, moving platforms, animated enemies, mobile controls and the AM Titan final boss.</p>
+    <a class="button button-dark" href="platformer.html">Play AM Run →</a>
+  </section>
+</main>
+<footer><span>© 2026 The AM Company</span><span>AM Games</span></footer>
+<script src="games.js"></script>
+</body>
+</html>
