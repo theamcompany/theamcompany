@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AM Digital Accounts</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+:root{
+  --ink:#171717;--muted:#747474;--line:#deddd8;--paper:#f7f6f2;--card:#fff;--accent:#b28b5e;
+  --header:rgba(247,246,242,.94);--hover:#eeece6;--input:#fff;--button-ink:#171717;--button-text:#fff;
+}
+:root[data-theme="dark"]{
+  --ink:#f1f0ec;--muted:#9d9c97;--line:#363632;--paper:#111110;--card:#191918;--accent:#c8a16e;
+  --header:rgba(17,17,16,.94);--hover:#22221f;--input:#191918;--button-ink:#f1f0ec;--button-text:#111110;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",Arial,sans-serif;line-height:1.6;transition:background-color .25s ease,color .25s ease}
+a{color:inherit;text-decoration:none}
+.site-header{height:82px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;border-bottom:1px solid var(--line);background:var(--header);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+.logo{font-size:25px;font-weight:600;letter-spacing:-1px}.logo span{color:var(--accent)}
+nav{display:flex;gap:30px;font-size:13px;margin-left:auto;margin-right:24px}nav a{color:var(--muted);position:relative}nav a:hover,nav a.active{color:var(--ink)}nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:1px;background:var(--ink)}
+.theme-toggle{display:inline-flex;align-items:center;gap:8px;min-width:74px;justify-content:center;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);padding:7px 11px;font:500 11px "DM Sans";cursor:pointer;transition:background .2s,border-color .2s,transform .2s}.theme-toggle:hover{background:var(--hover);border-color:var(--muted)}.theme-toggle:active{transform:scale(.97)}
+.hero{min-height:620px;padding:13vh 8vw 10vh;display:flex;flex-direction:column;justify-content:center;max-width:1100px}.eyebrow{font-size:11px;letter-spacing:2.5px;font-weight:600;color:var(--muted);margin:0 0 22px}.hero h1,.page-intro h1{font-family:"Playfair Display",serif;font-weight:500;font-size:clamp(52px,8vw,96px);line-height:.98;letter-spacing:-3px;margin:0}.hero h1 em{font-weight:500}.hero-copy{max-width:570px;color:var(--muted);margin:30px 0;font-size:17px}.hero-actions{display:flex;align-items:center;gap:28px}.button{border:0;padding:14px 22px;font:500 13px "DM Sans";cursor:pointer;display:inline-block}.button-dark{background:var(--button-ink);color:var(--button-text)}.button-dark:hover{opacity:.86}.text-link{font-size:13px;border-bottom:1px solid var(--muted);padding-bottom:3px}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin:0 6vw}.feature-card{min-height:290px;padding:38px 35px;border-right:1px solid var(--line);position:relative;transition:background .2s}.feature-card:first-child{border-left:1px solid var(--line)}.feature-card:hover{background:var(--hover)}.card-number{font-size:11px;color:var(--muted);letter-spacing:1.5px}.feature-card h2{font-family:"Playfair Display",serif;font-weight:500;font-size:30px;margin:55px 0 12px}.feature-card p{color:var(--muted);font-size:14px;max-width:310px;margin:0}.arrow{position:absolute;right:30px;bottom:28px;font-size:20px}
+.inner-page{max-width:1000px;margin:0 auto;padding:110px 30px 100px}.page-intro{padding-bottom:75px;border-bottom:1px solid var(--line)}.page-intro h1{font-size:72px}.page-intro>p:last-child{max-width:580px;color:var(--muted);margin:25px 0 0;font-size:16px}.menu-wrap{padding-top:10px}.menu-section{padding:52px 0;border-bottom:1px solid var(--line)}.section-title{display:flex;gap:22px;align-items:baseline;margin-bottom:14px}.section-title span{font-size:11px;color:var(--muted);letter-spacing:1px}.section-title h2{font:500 28px "Playfair Display";margin:0}.menu-item{display:flex;justify-content:space-between;gap:30px;padding:23px 0;border-top:1px solid var(--line)}.menu-item h3{font-size:15px;font-weight:500;margin:0 0 5px}.menu-item p{font-size:13px;color:var(--muted);margin:0}.menu-item strong{font-size:13px;font-weight:500;white-space:nowrap}
+.games-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-top:40px}.game-card{background:var(--card);border:1px solid var(--line);padding:28px;transition:background .25s,border-color .25s}.wide-game{grid-column:1/-1}.game-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:25px}.game-head h2{font:500 27px "Playfair Display";margin:7px 0 0}.small-button{background:transparent;color:var(--ink);border:1px solid var(--line);padding:8px 12px;font:500 11px "DM Sans";cursor:pointer}.small-button:hover{border-color:var(--muted);background:var(--hover)}.ttt-board{width:240px;height:240px;display:grid;grid-template-columns:repeat(3,1fr);margin:auto;border:1px solid var(--ink)}.ttt-cell{border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--card);color:var(--ink);font:500 32px "Playfair Display";cursor:pointer}.ttt-cell:nth-child(3n){border-right:0}.ttt-cell:nth-last-child(-n+3){border-bottom:0}.game-status{font-size:12px;color:var(--muted);text-align:center;margin:18px 0 0}.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.memory-card{aspect-ratio:1;background:var(--hover);border:1px solid var(--line);cursor:pointer;font-size:0;color:var(--ink)}.memory-card.flipped,.memory-card.matched{background:var(--card);font-size:22px}.memory-card.matched{opacity:.6}.game-copy{color:var(--muted);font-size:14px}.guess-row{display:flex;gap:10px;max-width:450px}.guess-row input{flex:1;border:1px solid var(--line);padding:13px;background:var(--input);color:var(--ink);font:14px "DM Sans";outline:none}.guess-row input::placeholder{color:var(--muted)}.guess-row input:focus{border-color:var(--muted)}.wide-game .game-status{text-align:left}
+footer{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:25px 6vw;color:var(--muted);font-size:11px;letter-spacing:.3px}
+@media(max-width:700px){.site-header{height:auto;min-height:72px;padding:14px 5vw;align-items:center;gap:10px}.site-header nav{gap:13px;flex-wrap:wrap;justify-content:flex-end;font-size:11px;margin-right:6px}.theme-toggle{min-width:38px;padding:7px 9px}.theme-label{display:none}.hero{padding:100px 7vw;min-height:560px}.hero h1{font-size:54px}.hero-copy{font-size:15px}.hero-actions{align-items:flex-start;flex-direction:column;gap:18px}.feature-grid{grid-template-columns:1fr;margin:0 5vw}.feature-card,.feature-card:first-child{border-left:1px solid var(--line)}.inner-page{padding:75px 20px}.page-intro h1{font-size:55px}.games-grid{grid-template-columns:1fr}.wide-game{grid-column:auto}.menu-item{gap:15px}.ttt-board{width:210px;height:210px}footer{padding:22px 5vw;gap:20px;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Menu additions */
+.menu-note{font-size:12px;color:var(--muted);margin:-2px 0 20px;padding-left:0;letter-spacing:.3px}.menu-subscription{margin-top:24px;padding:18px 0 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.menu-subscription strong{color:var(--ink);font-weight:500;margin-left:4px}
+
+.reaction-button{width:100%;min-height:110px;border:1px solid var(--line);background:var(--hover);color:var(--ink);font:500 24px "Playfair Display";cursor:pointer;transition:.15s}.reaction-button[data-state="go"]{background:var(--ink);color:var(--button-text)}.dodge-canvas{width:100%;height:auto;display:block;border:1px solid var(--line);background:var(--hover)}.dodge-controls{display:flex;gap:7px;justify-content:center;margin-top:10px}.dodge-controls .small-button{min-width:42px}
+
+
+.accounts-page{padding-bottom:40px}.accounts-shell{background:var(--card);border:1px solid var(--line);padding:20px}.accounts-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:18px}.accounts-head h2{font:500 28px "Playfair Display";margin:0}.accounts-head p{font-size:12px;color:var(--muted);margin:6px 0 0}.account-actions{display:flex;gap:8px;flex-wrap:wrap}.account-status{font-size:11px;color:var(--muted);margin:0 0 12px}.sheet-wrap{overflow:auto;border:1px solid var(--line)}.sheet{width:100%;min-width:760px;border-collapse:collapse;font-size:12px}.sheet th,.sheet td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 9px;height:34px;box-sizing:border-box}.sheet th{font-weight:600;background:var(--hover);white-space:nowrap}.sheet td.num,.sheet th.num{text-align:right}.sheet td.day{text-align:center;width:74px}.sheet td[contenteditable="true"]{outline:none;background:transparent}.sheet td[contenteditable="true"]:focus{box-shadow:inset 0 0 0 1px var(--ink)}.sheet input.sheet-input{width:100%;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;padding:0}.sheet .month-cell{vertical-align:top;min-width:120px}.sheet .summary-label{font-weight:600}.sheet .summary-value{background:var(--hover);font-weight:600}.sheet .blank{height:22px;background:var(--bg)}.pin-panel{display:none;margin-bottom:14px;padding:12px;border:1px solid var(--line);background:var(--hover)}.pin-panel.show{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.pin-panel input{width:120px}.pin-error{font-size:11px;color:var(--muted)}.edit-note{font-size:11px;color:var(--muted);margin-top:12px}.secret-back{display:inline-flex;margin:0 0 18px;color:var(--muted);font-size:11px;text-decoration:none}.secret-back:hover{color:var(--ink)}
+@media(max-width:700px){.accounts-shell{padding:12px}.accounts-head{align-items:flex-start;flex-direction:column}.sheet{min-width:720px}}
+
+/* Standalone AM Digital Accounts: match the AM dark interface. */
+:root{--ink:#f1f0ec;--muted:#9d9c97;--line:#363632;--paper:#111110;--card:#191918;--accent:#c8a16e;--header:rgba(17,17,16,.94);--hover:#22221f;--input:#191918;--button-ink:#f1f0ec;--button-text:#111110;--bg:#111110}
+</style>
+</head>
+<body>
+<header class="site-header">
+<a class="logo" href="index.html">AM<span>.</span></a>
+<nav><a href="index.html">Home</a><a href="restaurant.html">AM Fine Dining</a><a href="spa.html">AM Spa</a><a class="active" href="games.html">Games</a></nav>
+<button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Dark mode"><span aria-hidden="true">◐</span><span class="theme-label">Dark</span></button>
+</header>
+<main class="inner-page accounts-page">
+<section class="page-intro"><p class="eyebrow">AM DIGITAL ACCOUNTS</p><h1>Digital Accounts.</h1><p>A private, spreadsheet-style account book based directly on the supplied AM Accounts workbook.</p></section>
+<a class="secret-back" href="javascript:history.back()">← Back to Everything Bananas</a>
+<section class="accounts-shell">
+<div class="accounts-head"><div><h2>AM Digital Accounts</h2><p>Changes are published to the shared AM Digital Accounts database when Lock is pressed.</p></div><div class="account-actions"><button class="small-button" id="editBtn">🔒 Edit</button><button class="small-button" id="lockBtn" style="display:none">🔒 Lock</button><button class="small-button" id="resetBtn">Reset to Original</button></div></div>
+<div class="pin-panel" id="pinPanel"><label for="pinInput">PIN</label><input id="pinInput" type="password" inputmode="numeric" maxlength="4" placeholder="4-digit PIN"><button class="button button-dark" id="unlockBtn">Unlock</button><span class="pin-error" id="pinError"></span></div>
+<p class="account-status" id="status">View only · Original workbook data loaded.</p>
+<div class="sheet-wrap"><table class="sheet"><thead><tr><th>Day No.</th><th>Item</th><th class="num">Price</th><th>Customer</th><th>Month</th><th class="num">Quantity</th></tr></thead><tbody id="sheetBody"></tbody><tfoot id="sheetFoot"></tfoot></table></div>
+
+</section>
+</main>
+<footer><span>AM Digital Accounts</span><span>Private AM records</span></footer>
+<script>
+(function(){
+  // Set this to the deployed Google Apps Script Web App URL.
+  const API_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+  const PIN = '2729';
+  const KEY = 'amDigitalAccountsV2';
+  const original={month:'',rows:[
+    [1,'Chai',40,'Mausi',1],[2,'Chai',20,'Muma',1],[3,'Chai',40,'Mausi',1],[4,'Chai',80,'Mausi',2],[5,'Chai',40,'Mausi',1],[6,'Poha',60,'Mausi',1],[7,'Chai',40,'Mausi',1],[8,'Chai',40,'Mausi',1],
+    [9,'','','',''],[10,'','','',''],[11,'','','',''],[12,'','','',''],[13,'','','',''],[14,'','','',''],[15,'','','',''],[16,'','','',''],[17,'','','',''],[18,'','','',''],[19,'','','',''],[20,'','','',''],[21,'','','',''],[22,'','','',''],[23,'','','',''],[24,'','','',''],[25,'','','',''],[26,'','','',''],[27,'','','',''],[28,'','','',''],[29,'','','',''],[30,'','','',''],[31,'','','','']
+  ],deposit:1000};
+  let data=clone(original), editing=false, dirty=false;
+  function clone(x){return JSON.parse(JSON.stringify(x));}
+  function localCacheSave(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}}
+  function localCacheLoad(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.rows)&&x.rows.length===31)return x;}catch(e){}return clone(original)}
+  function status(t){document.getElementById('status').textContent=t}
+  function cell(tag,val,cls){const c=document.createElement(tag);if(cls)c.className=cls;c.textContent=val==null?'':val;return c}
+  function render(){
+    const body=document.getElementById('sheetBody');body.innerHTML='';
+    data.rows.forEach((r,i)=>{const tr=document.createElement('tr');tr.dataset.i=i;
+      tr.appendChild(cell('td',r[0],'day'));
+      ['1','2','3'].forEach((idx)=>{const td=cell('td',r[Number(idx)]??'',idx==='2'?'num':'');if(editing){td.contentEditable='true';td.dataset.col=idx;td.addEventListener('input',changed);td.addEventListener('blur',()=>normalize(td,i,Number(idx)));}tr.appendChild(td);});
+      if(i===0){const td=cell('td',data.month,'month-cell');td.rowSpan=31;if(editing){td.contentEditable='true';td.addEventListener('input',()=>{data.month=td.textContent;dirty=true;});}tr.appendChild(td);}
+      const qty=cell('td',r[4]??'','num');
+      if(editing){qty.contentEditable='true';qty.dataset.col='4';qty.addEventListener('input',changed);qty.addEventListener('blur',()=>normalize(tdSafe(qty),i,4));}
+      tr.appendChild(qty); body.appendChild(tr);
+    });
+    const foot=document.getElementById('sheetFoot');foot.innerHTML='';
+    const total=data.rows.reduce((s,r)=>s+(Number(r[2])||0),0), remaining=(Number(data.deposit)||0)-total;
+    let tr=document.createElement('tr');let gl=cell('td','Grand Total:','summary-label');gl.colSpan=2;tr.appendChild(gl);tr.appendChild(cell('td',total,'num summary-value'));for(let i=0;i<3;i++)tr.appendChild(cell('td',''));foot.appendChild(tr);
+    tr=document.createElement('tr');tr.innerHTML='<td class="blank" colspan="6"></td>';foot.appendChild(tr);
+    tr=document.createElement('tr');let l=cell('td','Deposited Amt. :','summary-label');l.colSpan=2;tr.appendChild(l);let dep=cell('td',data.deposit,'num summary-value');if(editing){dep.contentEditable='true';dep.addEventListener('input',()=>{data.deposit=Number(dep.textContent.replace(/[^0-9.-]/g,''))||0;dirty=true;});dep.addEventListener('blur',()=>render());}tr.appendChild(dep);for(let i=0;i<3;i++)tr.appendChild(cell('td',''));foot.appendChild(tr);
+    tr=document.createElement('tr');tr.innerHTML='<td class="blank" colspan="6"></td>';foot.appendChild(tr);
+    tr=document.createElement('tr');let rl=cell('td','Remaining Deposit:','summary-label');rl.colSpan=2;tr.appendChild(rl);tr.appendChild(cell('td',remaining,'summary-value'));for(let i=0;i<3;i++)tr.appendChild(cell('td',''));foot.appendChild(tr);
+  }
+  function tdSafe(x){return x}
+  function changed(e){const td=e.currentTarget,i=Number(td.parentElement.dataset.i),c=Number(td.dataset.col);let v=td.textContent;if(c===2||c===4)v=v.replace(/[^0-9.-]/g,'');data.rows[i][c]=v===''?'':Number(v);dirty=true;}
+  function normalize(td,i,c){let v=td.textContent.trim();if(c===2||c===4)v=v===''?'':Number(v);data.rows[i][c]=v;dirty=true;render();}
+  async function apiGet(){
+    if(!API_URL || API_URL.includes('PASTE_YOUR_')) return null;
+    const res=await fetch(API_URL+'?action=get&ts='+Date.now(),{cache:'no-store'}); if(!res.ok)throw new Error('HTTP '+res.status); const body=await res.json(); if(!body.ok)throw new Error(body.error||'Server error'); return body.data;
+  }
+  async function apiWrite(action){
+    if(!API_URL || API_URL.includes('PASTE_YOUR_')) throw new Error('Shared database URL is not configured.');
+    const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({action,pin:PIN,data})}); if(!res.ok)throw new Error('HTTP '+res.status); const body=await res.json(); if(!body.ok)throw new Error(body.error||'Server error'); if(body.data)data=body.data;
+  }
+  async function loadShared(){
+    try{const shared=await apiGet();if(shared){data=shared;localCacheSave();status('Shared accounts loaded.');return true;}}
+    catch(e){status('Shared database unavailable · showing last local copy.');}
+    data=localCacheLoad();return false;
+  }
+  async function publishAndLock(){
+    if(!editing)return;
+    const btn=document.getElementById('lockBtn');btn.disabled=true;status('Publishing changes to all users…');
+    try{await apiWrite('publish');localCacheSave();dirty=false;editing=false;document.getElementById('editBtn').style.display='';btn.style.display='none';document.getElementById('pinPanel').classList.remove('show');render();status('Locked · published shared version saved.');}
+    catch(e){btn.disabled=false;status('Not published: '+e.message);}
+  }
+  function setEditing(v){editing=v;document.getElementById('editBtn').style.display=v?'none':'';document.getElementById('lockBtn').style.display=v?'':'none';document.getElementById('lockBtn').disabled=false;document.getElementById('pinPanel').classList.remove('show');document.getElementById('pinError').textContent='';status(v?'Editing enabled · press Lock to publish changes to every user.':'View only · Changes are locked.');render();}
+  document.getElementById('editBtn').onclick=()=>document.getElementById('pinPanel').classList.add('show');
+  document.getElementById('unlockBtn').onclick=()=>{const p=document.getElementById('pinInput').value;if(p===PIN){document.getElementById('pinInput').value='';setEditing(true)}else document.getElementById('pinError').textContent='Incorrect PIN.'};
+  document.getElementById('lockBtn').onclick=publishAndLock;
+  document.getElementById('resetBtn').onclick=async()=>{if(!confirm('Reset all account data to the original supplied spreadsheet and publish it to every user?'))return;data=clone(original);render();try{await apiWrite('reset');localCacheSave();dirty=false;setEditing(false);status('Original workbook restored and published.');}catch(e){status('Reset not published: '+e.message);}};
+  window.addEventListener('beforeunload',e=>{if(editing&&dirty){e.preventDefault();e.returnValue='';}});
+  (async()=>{await loadShared();render();})();
+})();
+</script>
+<script>
+(function(){
+  const root=document.documentElement, button=document.querySelector('.theme-toggle');
+  const saved=localStorage.getItem('am-theme');
+  root.dataset.theme=saved||'dark';
+  function update(){
+    const dark=root.dataset.theme==='dark';
+    if(!button)return;
+    button.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');
+    button.setAttribute('title',dark?'Light mode':'Dark mode');
+    button.innerHTML=dark?'<span aria-hidden="true">☼</span><span class="theme-label">Light</span>':'<span aria-hidden="true">◐</span><span class="theme-label">Dark</span>';
+  }
+  update();
+  button&&button.addEventListener('click',function(){root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';localStorage.setItem('am-theme',root.dataset.theme);update();});
+})();
+</script>
+</body></html>
