@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AM Digital Accounts</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+:root{--ink:#171717;--muted:#747474;--line:#deddd8;--paper:#f7f6f2;--card:#fff;--accent:#b28b5e;--header:rgba(247,246,242,.94);--hover:#eeece6;--input:#fff;--button-ink:#171717;--button-text:#fff}
+:root[data-theme="dark"]{--ink:#f1f0ec;--muted:#9d9c97;--line:#363632;--paper:#111110;--card:#191918;--accent:#c8a16e;--header:rgba(17,17,16,.94);--hover:#22221f;--input:#191918;--button-ink:#f1f0ec;--button-text:#111110}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",Arial,sans-serif;line-height:1.6;transition:background-color .25s ease,color .25s ease}a{color:inherit;text-decoration:none}
+.site-header{height:82px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;border-bottom:1px solid var(--line);background:var(--header);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+.logo{font-size:25px;font-weight:600;letter-spacing:-1px}.logo span{color:var(--accent)}nav{display:flex;gap:30px;font-size:13px;margin-left:auto;margin-right:24px}nav a{color:var(--muted);position:relative}nav a:hover,nav a.active{color:var(--ink)}nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:1px;background:var(--ink)}
+.theme-toggle{display:inline-flex;align-items:center;gap:8px;min-width:74px;justify-content:center;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);padding:7px 11px;font:500 11px "DM Sans";cursor:pointer;transition:background .2s,border-color .2s,transform .2s}.theme-toggle:hover{background:var(--hover);border-color:var(--muted)}.theme-toggle:active{transform:scale(.97)}
+.inner-page{max-width:1000px;margin:0 auto;padding:110px 30px 100px}.page-intro{padding-bottom:60px;border-bottom:1px solid var(--line)}.eyebrow{font-size:11px;letter-spacing:2.5px;font-weight:600;color:var(--muted);margin:0 0 22px}.page-intro h1{font-family:"Playfair Display",serif;font-weight:500;font-size:clamp(55px,8vw,76px);line-height:.98;letter-spacing:-3px;margin:0}.page-intro>p:last-child{max-width:620px;color:var(--muted);margin:25px 0 0;font-size:16px}
+.account-toolbar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:25px 0;border-bottom:1px solid var(--line)}.toolbar-copy{font-size:12px;color:var(--muted)}.toolbar-copy strong{color:var(--ink);font-weight:500}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.button{border:0;padding:12px 18px;font:500 12px "DM Sans";cursor:pointer;display:inline-block}.button-dark{background:var(--button-ink);color:var(--button-text)}.button-dark:hover{opacity:.86}.small-button{background:transparent;color:var(--ink);border:1px solid var(--line);padding:8px 12px;font:500 11px "DM Sans";cursor:pointer}.small-button:hover{border-color:var(--muted);background:var(--hover)}button:disabled{opacity:.45;cursor:not-allowed}.status{font-size:11px;color:var(--muted);min-height:18px;padding:14px 0}.status.ok{color:var(--accent)}.status.err{color:#b65b5b}
+.sheet{border:1px solid var(--line);background:var(--card);overflow:auto}.sheet-title{display:flex;align-items:baseline;gap:14px;padding:22px 24px;border-bottom:1px solid var(--line)}.sheet-title h2{font:500 28px "Playfair Display";margin:0}.sheet-title span{font-size:10px;letter-spacing:1.5px;color:var(--muted)}.sheet-inner{min-width:900px}.grid{display:grid;grid-template-columns:82px 1.35fr 120px 1.2fr 1fr 110px;align-items:stretch}.cell{min-height:43px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:0;display:flex;align-items:center}.cell:last-child{border-right:0}.head{background:var(--hover);font-size:10px;font-weight:600;letter-spacing:.5px;padding:10px 12px;color:var(--muted)}.value{font-size:12px;padding:0 12px}.value input{width:100%;height:41px;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:12px;padding:0}.value input:disabled{opacity:.85;cursor:not-allowed}.value input:focus{background:var(--hover)}.num input{text-align:right}.grid .cell:nth-child(6n){border-right:0}
+.summary{margin-top:25px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.sumrow{display:grid;grid-template-columns:1fr 180px;border-bottom:1px solid var(--line)}.sumrow:last-child{border-bottom:0}.sumrow>div{padding:14px 15px;font-size:12px}.sumrow>div:last-child{text-align:right;border-left:1px solid var(--line);font-weight:500}.sumrow label{display:block;color:var(--muted)}.deposit-input{width:100%;border:0;background:transparent;color:var(--ink);text-align:right;outline:0;font:500 12px "DM Sans"}.deposit-input:disabled{opacity:.9}.deposit-input:focus{background:var(--hover)}
+.foot{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:11px;letter-spacing:.3px}.foot a{color:var(--muted)}.foot a:hover{color:var(--ink)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.58);display:none;align-items:center;justify-content:center;padding:20px;z-index:30}.modal.open{display:flex}.modal-card{width:min(380px,100%);background:var(--card);border:1px solid var(--line);padding:30px;box-shadow:0 20px 60px rgba(0,0,0,.18)}.modal-card h2{font:500 28px "Playfair Display";margin:0 0 8px}.modal-card p{font-size:12px;color:var(--muted);margin:0 0 17px}.pin{width:100%;height:46px;border:1px solid var(--line);background:var(--input);color:var(--ink);padding:0 12px;font:500 18px "DM Sans";letter-spacing:.25em;outline:0}.pin:focus{border-color:var(--muted)}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+@media(max-width:700px){.site-header{height:auto;min-height:72px;padding:14px 5vw;align-items:center;gap:10px}.site-header nav{gap:13px;flex-wrap:wrap;justify-content:flex-end;font-size:11px;margin-right:6px}.theme-toggle{min-width:38px;padding:7px 9px}.theme-label{display:none}.inner-page{padding:75px 20px}.page-intro h1{font-size:55px}.account-toolbar{align-items:flex-start;flex-direction:column}.actions{justify-content:flex-start}.foot{gap:20px;flex-direction:column}.sumrow{grid-template-columns:1fr 145px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="index.html">AM<span>.</span></a>
+  <nav><a href="index.html">Home</a><a href="restaurant.html">AM Fine Dining</a><a href="spa.html">AM Spa</a><a href="games.html">Games</a></nav>
+  <button class="theme-toggle" id="themeBtn" type="button" aria-label="Switch to dark mode" title="Dark mode"><span aria-hidden="true">◐</span><span class="theme-label">Dark</span></button>
+</header>
+<main class="inner-page">
+  <section class="page-intro">
+    <p class="eyebrow">AM DIGITAL ACCOUNTS</p>
+    <h1>Digital Accounts.</h1>
+    <p>A private, spreadsheet-style account ledger for The AM Company. The latest published version is shared across devices.</p>
+  </section>
+  <section class="account-toolbar">
+    <div class="toolbar-copy"><strong id="connectionLabel">Shared ledger</strong><br><span id="status">Connecting to shared database…</span></div>
+    <div class="actions"><button id="editBtn" class="small-button">Enable Editing</button><button id="lockBtn" class="button button-dark" disabled>Lock &amp; Publish</button><button id="resetBtn" class="small-button" disabled>Reset</button></div>
+  </section>
+  <section class="sheet">
+    <div class="sheet-title"><h2>Digital AM Accounts</h2><span>LEDGER</span></div>
+    <div class="sheet-inner"><div id="grid" class="grid"></div></div>
+  </section>
+  <section class="summary">
+    <div class="sumrow"><div>Grand Total:</div><div id="grandTotal">₹0</div></div>
+    <div class="sumrow"><div>Deposited Amt.:</div><div><input id="deposit" class="deposit-input" disabled type="number" step="0.01" min="0" inputmode="decimal"></div></div>
+    <div class="sumrow"><div>Remaining Deposit:</div><div id="remaining">₹0</div></div>
+  </section>
+  <footer class="foot"><span>© 2026 The AM Company</span><span id="syncTime">Waiting for first synchronized copy</span></footer>
+</main>
+<div id="modal" class="modal"><div class="modal-card"><h2>Enable Editing</h2><p>Enter the access PIN to edit the accounts.</p><input id="pin" class="pin" inputmode="numeric" maxlength="4" autocomplete="off" type="password"><div class="modal-actions"><button id="cancelPin" class="small-button">Cancel</button><button id="submitPin" class="button button-dark">Unlock</button></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ============================================================
+   SUPABASE CONFIGURATION
+   Replace ONLY these two values with your Supabase project details.
+   Supabase Dashboard -> Connect / Settings -> API Keys.
+   Use the PUBLISHABLE key (or legacy anon key), NEVER a service_role key.
+   ============================================================ */
+const SUPABASE_URL='https://cejzlndeescifvdgarpc.supabase.co';
+const SUPABASE_KEY='sb_publishable_2qxD-LXNkmuAJ5TTR8S8JQ_vGmgVGZS';
+
+const PIN='2729';
+const TABLE='am_digital_accounts';
+const ROW_ID=1;
+const initialRows=Array.from({length:31},(_,i)=>({day:i+1,item:'',price:'',customer:'',month:'',quantity:''}));
+Object.assign(initialRows[0],{item:'Chai',price:40,customer:'Mausi',quantity:1});
+Object.assign(initialRows[1],{item:'Chai',price:20,customer:'Muma',quantity:1});
+Object.assign(initialRows[2],{item:'Chai',price:40,customer:'Mausi',quantity:1});
+Object.assign(initialRows[3],{item:'Chai',price:80,customer:'Mausi',quantity:2});
+Object.assign(initialRows[4],{item:'Chai',price:40,customer:'Mausi',quantity:1});
+Object.assign(initialRows[5],{item:'Poha',price:60,customer:'Mausi',quantity:1});
+Object.assign(initialRows[6],{item:'Chai',price:40,customer:'Mausi',quantity:1});
+Object.assign(initialRows[7],{item:'Chai',price:40,customer:'Mausi',quantity:1});
+const initialData={rows:initialRows,deposit:1000,updatedAt:0};
+let data=structuredClone(initialData), editing=false, ready=false, channel=null;
+const grid=document.getElementById('grid'),statusEl=document.getElementById('status'),editBtn=document.getElementById('editBtn'),lockBtn=document.getElementById('lockBtn'),resetBtn=document.getElementById('resetBtn'),depositEl=document.getElementById('deposit');
+function validConfig(){return SUPABASE_URL.startsWith('https://')&&SUPABASE_URL.includes('.supabase.co')&&SUPABASE_KEY&&SUPABASE_KEY.indexOf('PASTE_')!==0}
+function status(msg,type=''){statusEl.textContent=msg;statusEl.className='status '+type}
+function money(n){return '₹'+Number(n||0).toLocaleString('en-IN',{maximumFractionDigits:2})}
+function cleanNumber(v){return v===''?'':Number(v)}
+function render(){
+ grid.innerHTML='';
+ ['Day No.','Item','Price','Customer','Month','Quantity'].forEach(x=>{const d=document.createElement('div');d.className='cell head';d.textContent=x;grid.appendChild(d)});
+ data.rows.forEach((row,idx)=>{
+  const vals=[row.day,row.item,row.price,row.customer,row.month,row.quantity];
+  vals.forEach((v,col)=>{const d=document.createElement('div');d.className='cell value '+(col===0?'num ':'')+(col===2||col===5?'num':'');
+   const input=document.createElement('input');input.disabled=!editing;input.value=v??'';input.dataset.row=idx;input.dataset.col=col;
+   if(col===0){input.readOnly=true;input.tabIndex=-1}
+   if(col===2||col===5){input.type='number';input.step='any';input.min='0'}
+   input.addEventListener('input',()=>{const r=data.rows[idx],key=['day','item','price','customer','month','quantity'][col];r[key]=(col===2||col===5)?cleanNumber(input.value):input.value;updateTotals()});
+   d.appendChild(input);grid.appendChild(d);
+  });
+ });
+ depositEl.value=data.deposit??0;depositEl.disabled=!editing;updateTotals();
+}
+function updateTotals(){const total=data.rows.reduce((s,r)=>s+(Number(r.price)||0),0);document.getElementById('grandTotal').textContent=money(total);document.getElementById('remaining').textContent=money((Number(data.deposit)||0)-total)}
+function snapshot(){return {rows:data.rows.map(r=>({day:Number(r.day)||0,item:r.item??'',price:r.price===''?'':Number(r.price),customer:r.customer??'',month:r.month??'',quantity:r.quantity===''?'':Number(r.quantity)})),deposit:Number(data.deposit)||0,updatedAt:Date.now()}}
+function localSave(){try{localStorage.setItem('amDigitalAccountsLastCopy',JSON.stringify(data))}catch(e){}}
+function localLoad(){try{const x=JSON.parse(localStorage.getItem('amDigitalAccountsLastCopy'));if(x?.rows?.length===31)data=x}catch(e){}}
+function applyRemote(row){if(row?.data?.rows?.length===31){data=row.data;localSave();render();document.getElementById('syncTime').textContent=row.updated_at?'Last published '+new Date(row.updated_at).toLocaleString():'Live shared copy synchronized';status('Shared database connected.','ok')}}
+
+let supabaseClient=null;
+if(validConfig()){
+ try{
+  supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  (async()=>{
+   const {data:row,error}=await supabaseClient.from(TABLE).select('id,data,updated_at').eq('id',ROW_ID).maybeSingle();
+   if(error)throw error;
+   if(row)applyRemote(row);else{ready=true;render();status('Shared database is empty; the workbook starting data is ready.','ok')}
+   channel=supabaseClient.channel('am-digital-accounts-live').on('postgres_changes',{event:'*',schema:'public',table:TABLE,filter:'id=eq.1'},payload=>{if(payload.new?.data)applyRemote(payload.new)}).subscribe((s)=>{if(s==='SUBSCRIBED')status('Live shared database connected.','ok')});
+   ready=true;
+  })().catch(e=>{ready=false;localLoad();render();status('Shared database unavailable: '+e.message,'err')});
+ }catch(e){localLoad();render();status('Supabase configuration error: '+e.message,'err')}
+}else{localLoad();render();status('Supabase is not configured yet. Add your project URL and publishable key in this file.','err')}
+
+editBtn.onclick=()=>{document.getElementById('modal').classList.add('open');document.getElementById('pin').value='';setTimeout(()=>document.getElementById('pin').focus(),30)};
+document.getElementById('cancelPin').onclick=()=>document.getElementById('modal').classList.remove('open');
+document.getElementById('submitPin').onclick=()=>{if(document.getElementById('pin').value===PIN){editing=true;document.getElementById('modal').classList.remove('open');editBtn.disabled=true;lockBtn.disabled=false;resetBtn.disabled=false;render();status('Editing enabled. Changes are local until Lock & Publish is pressed.')}else{status('Incorrect PIN.','err')}};
+document.getElementById('pin').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('submitPin').click()});
+depositEl.addEventListener('input',()=>{data.deposit=cleanNumber(depositEl.value);updateTotals()});
+lockBtn.onclick=async()=>{if(!editing)return;if(!supabaseClient){status('Not published: Supabase is not configured or unavailable.','err');return}lockBtn.disabled=true;try{data=snapshot();const payload={id:ROW_ID,data,updated_at:new Date().toISOString()};const {error}=await supabaseClient.from(TABLE).upsert(payload,{onConflict:'id'});if(error)throw error;localSave();editing=false;editBtn.disabled=false;resetBtn.disabled=true;render();status('Saved and published. Every connected user now sees this version.','ok');document.getElementById('syncTime').textContent='Published '+new Date().toLocaleString()}catch(e){status('Not published: '+e.message,'err');lockBtn.disabled=false}};
+resetBtn.onclick=()=>{if(!editing)return;if(confirm('Replace the current editable copy with the original workbook values? Press Lock & Publish afterward to make them shared.')){data=structuredClone(initialData);render();status('Original workbook values restored locally. Press Lock & Publish to publish them.')}};
+document.getElementById('themeBtn').onclick=()=>{const dark=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=dark?'light':'dark';localStorage.setItem('am-theme',dark?'light':'dark');document.getElementById('themeBtn').innerHTML=dark?'<span aria-hidden="true">◐</span><span class="theme-label">Dark</span>':'<span aria-hidden="true">☼</span><span class="theme-label">Light</span>'};
+const savedTheme=localStorage.getItem('am-theme')||'dark';document.documentElement.dataset.theme=savedTheme;document.getElementById('themeBtn').innerHTML=savedTheme==='dark'?'<span aria-hidden="true">◐</span><span class="theme-label">Dark</span>':'<span aria-hidden="true">☼</span><span class="theme-label">Light</span>';
+window.addEventListener('beforeunload',()=>{if(editing)localSave()});
+</script>
+</body>
+</html>
